@@ -54,3 +54,5 @@ dkms.conf
 # AtmelStudio files
 .vs
 yellow/Debug
+project_settings.h
+project_settings.c
