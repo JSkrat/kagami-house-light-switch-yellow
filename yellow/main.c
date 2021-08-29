@@ -8,9 +8,9 @@
 #include <avr/io.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
-#include "../KagamiCore/RF model.h"
-#include "../KagamiCore/RF functions.h"
-#include "../KagamiCore/advertisement.h"
+#include "KagamiCore/RF model.h"
+#include "KagamiCore/RF functions.h"
+#include "KagamiCore/advertisement.h"
 #include "RF custom functions.h"
 
 int main(void)

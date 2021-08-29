@@ -9,13 +9,10 @@
 #ifndef RF_CUSTOM_FUNCTIONS_H_
 #define RF_CUSTOM_FUNCTIONS_H_
 
-#include "../KagamiCore/RF functions.h"
+#include "KagamiCore/RF functions.h"
 
-#define UNITS_COUNT 1
+#define UNITS_COUNT 2
 extern const tUnit Units[UNITS_COUNT];
-
-#define U1_F_COUNT 1
-extern const tRFCodeFunctionItem U1_functions[U1_F_COUNT];
 
 void custom_functions_init();
 
