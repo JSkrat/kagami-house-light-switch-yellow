@@ -8,6 +8,7 @@
 #include "project defines.h"
 #include <avr/interrupt.h>
 #include <stdint.h>
+#include "ui.h"
 
 typedef struct {
 	uint16_t timeout; // timer ticks left to call back
@@ -18,8 +19,9 @@ typedef struct {
 static tTimeout timers[TIMERS_COUNT];
 uint8_t timer_leds[LED_COUNT];
 const static uint8_t led_pins[LED_COUNT] = {LED_RED, LED_GREEN, LED_BLUE};
-static uint8_t led_phase = 0;
+static uint8_t led_phase;
 
+void dummy() {}
 
 void timer_init() {
 	// timer 1 initialization
@@ -27,8 +29,16 @@ void timer_init() {
 	TCCR1A = (0 << WGM11) | (0 << WGM10);
 	// clk/8
 	TCCR1B = (1 << WGM12) | (0 << WGM13) | (0 << CS12) | (1 << CS11) | (0 << CS10);
-	OCR1A = 0.0001 * F_CPU / 8; // interrupt every 100 us
-	TIMSK1 = (1 << TOIE1);
+	OCR1A = 0.001 * F_CPU / 8; // interrupt every 1000 us
+	TIMSK1 = (1 << OCIE1A);
+	for (int i = 0; i < LED_COUNT; i++) {
+		timer_leds[i] = 0;
+	}
+	led_phase = 0;
+	for (int i = 0; i < TIMERS_COUNT; i++) {
+		timers[i].timeout = 0;
+		timers[i].callback = &dummy;
+	}
 }
 
 void set_timeout(uint16_t timeout, void (*callback)()) {
@@ -41,7 +51,8 @@ void set_timeout(uint16_t timeout, void (*callback)()) {
 	}
 }
 
-ISR(TIMER1_OVF_vect) {
+ISR(TIMER1_COMPA_vect) {
+	ui_heartbeat();
 	// pwm first
 	// note: outputs are inverted, 0 for on
 	led_phase++;

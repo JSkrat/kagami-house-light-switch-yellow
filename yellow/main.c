@@ -12,6 +12,7 @@
 #include "KagamiCore/RF functions.h"
 #include "KagamiCore/advertisement.h"
 #include "RF custom functions.h"
+#include "ui.h"
 
 int main(void)
 {
@@ -20,6 +21,7 @@ int main(void)
 	functions_init(Units, UNITS_COUNT);
 	custom_functions_init();
 	advertisement_init();
+	ui_init();
 	// need timers going in sleep mode
 	set_sleep_mode(SLEEP_MODE_IDLE);
 	sei();

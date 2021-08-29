@@ -16,8 +16,8 @@
 #include <avr/interrupt.h>
 
 void custom_functions_init() {
-	timer_init();
 	led_init();
+	timer_init();
 	buzzer_init();
 }
 
