@@ -29,7 +29,7 @@ void timer_init() {
 	TCCR1A = (0 << WGM11) | (0 << WGM10);
 	// clk/8
 	TCCR1B = (1 << WGM12) | (0 << WGM13) | (0 << CS12) | (1 << CS11) | (0 << CS10);
-	OCR1A = 0.001 * F_CPU / 8; // interrupt every 1000 us
+	OCR1A = 0.0001 * F_CPU / 8; // interrupt every 100 us
 	TIMSK1 = (1 << OCIE1A);
 	for (int i = 0; i < LED_COUNT; i++) {
 		timer_leds[i] = 0;

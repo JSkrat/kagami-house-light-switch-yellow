@@ -80,6 +80,7 @@ uint8_t led_control_value(const uint8_t unit, const uint8_t function, const scSt
 		if (1 != request->length) return ercBadRequestData;
 		if (request->data[0]) essState = essOn;
 		else essState = essOff;
+		update_leds();
 		return ercOk;
 	} else {
 		response->length = 1;
