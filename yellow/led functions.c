@@ -28,10 +28,9 @@ static uint16_t manual_time = 0, manual_timeout = 0;
 static uint8_t sensor_unit = 0; 
 
 void led_init() {
-	// PD5 blue
-	// PD6 red
-	// PD7 green
-	DDRD |= _BV(LED_RED) | _BV(LED_GREEN) | _BV(LED_BLUE);
+	LEDS_DDR |= _BV(LED_RED) | _BV(LED_GREEN) | _BV(LED_BLUE);
+	// control is inversed, so turn them off at start
+	LEDS_PORT |= _BV(LED_RED) | _BV(LED_GREEN) | _BV(LED_BLUE);
 	// TODO load variables from eeprom here
 }
 
@@ -81,6 +80,7 @@ uint8_t led_control_value(const uint8_t unit, const uint8_t function, const scSt
 		if (1 != request->length) return ercBadRequestData;
 		if (request->data[0]) essState = essOn;
 		else essState = essOff;
+		update_leds();
 		return ercOk;
 	} else {
 		response->length = 1;
