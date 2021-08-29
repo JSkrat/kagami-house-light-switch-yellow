@@ -8,7 +8,6 @@
 #include "project defines.h"
 #include <avr/interrupt.h>
 #include <stdint.h>
-#include "ui.h"
 
 typedef struct {
 	uint16_t timeout; // timer ticks left to call back
@@ -52,7 +51,6 @@ void set_timeout(uint16_t timeout, void (*callback)()) {
 }
 
 ISR(TIMER1_COMPA_vect) {
-	ui_heartbeat();
 	// pwm first
 	// note: outputs are inverted, 0 for on
 	led_phase++;

@@ -15,8 +15,8 @@
 #define LED_ERROR UI_LED_RED
 #define LED_RF UI_LED_RED
 
-static uint16_t ui_phase;
-#define UI_PERIOD 500
+static uint8_t ui_phase;
+#define UI_PERIOD 50
 
 void ui_init() {
 	UI_LEDS_DDR |= _BV(UI_LED_RED) | _BV(UI_LED_YELLOW);
@@ -47,9 +47,9 @@ void ui_rf_func(bool active) {
 }
 
 void ui_heartbeat() {
-	ui_phase += 1;
-	if (UI_PERIOD <= ui_phase) {
-		ui_phase = 0;
+	//ui_phase += 1;
+	//if (UI_PERIOD <= ui_phase) {
+	//	ui_phase = 0;
 		UI_LEDS_PORT ^= _BV(LED_HEARTBEAT);
-	}
+	//}
 }

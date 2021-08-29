@@ -27,6 +27,7 @@ int main(void)
 	sei();
     while (1) {
 		advertisement_process();
+		ui_heartbeat();
 		sleep_mode();
     }
 }
